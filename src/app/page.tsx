@@ -1,5 +1,8 @@
+import { Hero } from "@/widgets/hero";
 export default function Home() {
   return (
-    <div className=""></div>
+    <main className="p-20 bg-zinc-900 w-full">
+      <Hero />
+    </main>
   );
 }
