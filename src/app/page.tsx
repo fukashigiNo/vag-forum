@@ -1,7 +1,7 @@
 import { Hero } from "@/widgets/hero";
 export default function Home() {
   return (
-    <main className="p-20 bg-zinc-900 w-full">
+    <main className="p-20 bg-zinc-900 w-screen flex-1">
       <Hero />
     </main>
   );
