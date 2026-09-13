@@ -7,6 +7,7 @@ interface IIcon  {
     color: string;
     icon: LucideIcon;
     size: number
+    fill?: string
     strokeWidth?: number;
     handlePress?: () => void
 }
@@ -16,13 +17,14 @@ export default function Icon ({
     icon: IconComponent,
     size,
     color,
+    fill,
     strokeWidth = 1.5,
     handlePress = () => {}
 }:IIcon) {
     return (
         <div className={className}>
             <div onClick={handlePress}>
-                <IconComponent size={size} color={color} strokeWidth={strokeWidth} />
+                <IconComponent size={size} color={color} strokeWidth={strokeWidth} fill={fill} />
             </div>
         </div>
     )
