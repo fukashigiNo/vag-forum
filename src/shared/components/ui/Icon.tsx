@@ -17,7 +17,7 @@ export default function Icon ({
     icon: IconComponent,
     size,
     color,
-    fill,
+    fill="none",
     strokeWidth = 1.5,
     handlePress = () => {}
 }:IIcon) {
