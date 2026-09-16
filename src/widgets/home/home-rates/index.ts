@@ -1,0 +1,1 @@
+export {default as HomeRate} from "./HomeRate"
