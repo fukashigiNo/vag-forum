@@ -1,0 +1,1 @@
+export {default as HomeRatesCard} from "./ui/HomeRates"
