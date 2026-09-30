@@ -1,0 +1,1 @@
+export {default as ForumHero} from "./ForumHero"
