@@ -33,14 +33,14 @@
 ## Архитектура
 
 Частичный **Feature-Sliced Design**:
-
+```bash
 src/
 ├── app/ # роуты и layout (Next.js App Router)
 ├── screens/ # экраны (home, forum)
 ├── widgets/ # крупные блоки UI (header, home)
 ├── entities/ # сущности (карточки и т.п.)
 └── shared/ # переиспользуемый UI и утилиты
-
+```
 ## Запуск
 
 ```bash
