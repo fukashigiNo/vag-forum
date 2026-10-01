@@ -1,5 +1,5 @@
 "use client"
-import { Icon, HeroLogo } from "@/shared/components"
+import { HeroLogo } from "@/shared/ui"
 import { MessageSquare, ArrowRight } from "lucide-react"
 import { HomeForumCard } from "@/entities/home/home-forum"
 import Link from "next/link"
