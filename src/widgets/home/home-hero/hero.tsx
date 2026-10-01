@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import { Icon } from "@/shared/components"
+import { Icon } from "@/shared/ui"
 import { ArrowRight, User } from "lucide-react"
 import { motion } from "framer-motion"
 
