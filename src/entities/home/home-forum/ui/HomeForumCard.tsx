@@ -1,5 +1,5 @@
 "use client"
-import { Icon } from "@/shared/components"
+import { Icon } from "@/shared/ui"
 import { MessageSquare, Eye } from "lucide-react"
 import { useRouter } from "next/navigation"
 
