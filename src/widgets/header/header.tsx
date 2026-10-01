@@ -1,5 +1,5 @@
 "use client"
-import { Icon } from "@/shared/components"
+import { Icon } from "@/shared/ui"
 import Link from "next/link"
 import { House, MessagesSquare, Star, Wrench, ShieldCheck  } from "lucide-react"
 
