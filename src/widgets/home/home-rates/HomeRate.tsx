@@ -1,4 +1,4 @@
-import { HeroLogo } from "@/shared/components"
+import { HeroLogo } from "@/shared/ui"
 import { HomeRatesCard } from "@/entities/home/home-rates";
 import { Star } from "lucide-react"
 
