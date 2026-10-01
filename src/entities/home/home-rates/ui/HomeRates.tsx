@@ -1,5 +1,5 @@
 import { Star } from "lucide-react"
-import { Icon } from "@/shared/components"
+import { Icon } from "@/shared/ui"
 import { useRouter } from "next/navigation"
 
 interface IHomeRate {
