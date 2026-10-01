@@ -1,4 +1,4 @@
-import { Icon } from "@/shared/components"
+import { Icon } from "@/shared/ui"
 import { Gauge, Zap } from "lucide-react"
 import { useRouter } from "next/navigation"
 
