@@ -2,6 +2,7 @@
 import { Icon } from "@/shared/ui"
 import { useState } from "react"
 import { Search, SlidersHorizontal } from "lucide-react"
+import { ForumCard } from "@/entities/forum/forum-card"
 
 const mockData = [
     {
@@ -33,7 +34,7 @@ export default function ForumHero() {
     const [active, setActive] = useState(false)
     return (
         <div className="mt-6">
-            <div className="flex  px-4">
+            <div className="flex mb-5 px-4">
                 <label
                     className="relative flex w-[60%] items-center rounded-[12px] border-2 border-zinc-700 bg-zinc-800 p-2 focus-within:border-blue-500"
                 >
@@ -56,7 +57,7 @@ export default function ForumHero() {
                             key={item.id}
                             onClick={() => setActiveCar(item.car)}
                             aria-pressed={activeCar === item.car}
-                            className={`ml-4 rounded-full border border-zinc-700 px-2 py-1 text-[14px] 
+                            className={`ml-4 rounded-full border border-zinc-700 px-2 py-1 text-[14px] cursor-pointer
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 ${
                                 activeCar === item.car
                                     ? "bg-blue-500 text-white"
@@ -75,9 +76,12 @@ export default function ForumHero() {
                         
                 </div>
             </div>
-                <span className="text-white text-xl px-4 mt-5">
+                <span className="text-white text-xl px-4 font-semibold ">
                     All threads
                 </span>
+                <div>
+                    <ForumCard />
+                </div>
         </div>
     )
 }
