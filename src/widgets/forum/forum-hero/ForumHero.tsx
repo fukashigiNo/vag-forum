@@ -3,6 +3,7 @@ import { Icon } from "@/shared/ui"
 import { useState } from "react"
 import { Search, SlidersHorizontal } from "lucide-react"
 import { ForumCard } from "@/entities/forum/forum-card"
+import { ForumSettingsModal } from "@/entities/forum/forum-settings"
 
 const mockData = [
     {
@@ -69,18 +70,29 @@ export default function ForumHero() {
                     ))}
                         <button 
                             className="ml-4 cursor-pointer"
-                            onClick={() => setActive(prevState => prevState = true)}
+                            onClick={() => {setActive(prevState => prevState = !prevState)}}
                         >
                             <Icon icon={SlidersHorizontal} color="white" size={18} />
                         </button>
-                        
+                        {
+                            active && <ForumSettingsModal />
+                        }
                 </div>
             </div>
                 <span className="text-white text-xl px-4 font-semibold ">
                     All threads
                 </span>
                 <div>
-                    <ForumCard />
+                    <ForumCard
+                    letter="A"
+                    solved
+                    enterprise="Engine"
+                    title="Lorem ipsum dolor sit amet consectetur"
+                    user="Rozik911"
+                    time="5 h. ago"
+                    answers={47}    
+                    views={1290}
+                    />
                 </div>
         </div>
     )
