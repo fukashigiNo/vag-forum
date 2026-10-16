@@ -1,62 +1,75 @@
 import { CircleCheck } from "lucide-react"
-import { useState } from "react"
 import { Icon } from "@/shared/ui"
 
-interface IForumCard {
-    letter: string,
-    status: boolean,
-    enterprise: string,
-    title: string,
-    user: string,
-    time: string,
-    answers: number,
-    views: number,
+export interface IForumCardProps {
+    letter: string
+    solved: boolean
+    enterprise: string
+    title: string
+    user: string
+    time: string
+    answers: number
+    views: number
+}
+
+interface IStatProps {
+    value: number
+    label: string
+}
+
+function Stat({ value, label }: IStatProps) {
+    return (
+        <div className="flex flex-col items-center">
+            <p className="font-semibold">{value}</p>
+            <p className="text-sm text-white/60">{label}</p>
+        </div>
+    )
 }
 
 export default function ForumCard({
-    //letter,
-    //status,
-    //enterprise,
-    //title,
-    //user,
-    //time,
-    //answers,
-    //views
-}) {
-    const [status, setStatus] = useState<boolean>(true)
+    letter,
+    solved,
+    enterprise,
+    title,
+    user,
+    time,
+    answers,
+    views,
+}: IForumCardProps) {
     return (
-        <div className="flex items-center bg-zinc-800 w-[98%] mx-auto rounded-xl p-5 border border-white/30">
-            <div className="bg-blue-500 py-3 px-4 rounded-[12px] text-white font-bold">
-                A
+        <article 
+            className="mx-auto flex w-[98%] items-center gap-4 rounded-xl border 
+            border-white/30 bg-zinc-800 p-5 text-white mt-5 cursor-pointer hover:border-blue-600"
+            onClick={() => {}}
+        >
+            <div className="shrink-0 rounded-xl bg-blue-500 px-4 py-3 font-bold">
+                {letter}
             </div>
-            <div className="ml-3 flex flex-row justify-between">
-                <div className="gap-3">
-                    <div className="flex gap-4">
-                        { status && 
-                            <span className="flex items-center gap-1">
-                                <Icon icon={CircleCheck} size={14} color="white"/>
-                                <p className="text-white">SOLVED</p>
+
+            <div className="flex min-w-0 flex-1 items-center justify-between gap-3">
+                <div className="min-w-0">
+                    <div className="mb-1 flex items-center gap-4">
+                        {solved && (
+                            <span className="flex items-center gap-1 bg-blue-500 px-2 rounded-[12px]">
+                                <Icon icon={CircleCheck} size={12} color="white" />
+                                <span className="text-white text-[13px]">SOLVED</span>
                             </span>
-                        }
-                        <p className="text-white">Engine</p>
+                        )}
+                        <span className="text-white/60">{enterprise}</span>
                     </div>
-                    <span className="text-white w-50%">Lorem ipsum dolor sit amet consectetur adipisicing elit. ipsa molestias eveniet. Maxime, molestias.</span>
-                    <div>
-                        <span className="text-white">@Rozik911</span>
-                        <span className="text-white">5 h. ago</span>
-                    </div>
+                    <h3 className="truncate">{title}</h3>
                 </div>
-                <div className="flex gap-4 justify-start ml-10">
-                    <div className="flex flex-col items-center">
-                        <p className="text-white">47</p>
-                        <p  className="text-white">answers</p>
-                    </div>
-                    <div>
-                        <p className="text-white">1290</p>
-                        <p className="text-white">views</p>
-                    </div>
+
+                <div className="flex shrink-0 flex-col text-sm text-white/60">
+                    <span>@{user}</span>
+                    <span>{time}</span>
                 </div>
             </div>
-        </div>
+
+            <div className="flex shrink-0 gap-6">
+                <Stat value={answers} label="answers" />
+                <Stat value={views} label="views" />
+            </div>
+        </article>
     )
 }
