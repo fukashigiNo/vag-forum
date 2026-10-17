@@ -70,12 +70,12 @@ export default function ForumHero() {
                     ))}
                         <button 
                             className="ml-4 cursor-pointer"
-                            onClick={() => {setActive(prevState => prevState = !prevState)}}
+                            onClick={() => {setActive(prevState => !prevState )}}
                         >
                             <Icon icon={SlidersHorizontal} color="white" size={18} />
                         </button>
                         {
-                            active && <ForumSettingsModal />
+                            active && <ForumSettingsModal setShow={() => setActive(false)}/>
                         }
                 </div>
             </div>
