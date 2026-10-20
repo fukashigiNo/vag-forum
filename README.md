@@ -32,13 +32,15 @@
 
 ## Архитектура
 
-Частичный Feature-Sliced Design:
+Feature-Sliced Design:
+```bash
 src/
 ├── app/        # роуты и layout
 ├── screens/    # экраны
 ├── widgets/    # крупные UI-блоки
 ├── entities/   # сущности
 └── shared/     # переиспользуемый код
+```
 text## Запуск
 
 ```bash
