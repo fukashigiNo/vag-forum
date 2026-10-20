@@ -1,1 +1,1 @@
-export {default as ForumSettingsModal} from "./ForumSettingsModal"
+export * from "./ui"
