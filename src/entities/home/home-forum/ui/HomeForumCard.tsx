@@ -2,16 +2,8 @@
 import { Icon } from "@/shared/ui"
 import { MessageSquare, Eye } from "lucide-react"
 import { useRouter } from "next/navigation"
+import type { IHomeForumCard } from "../types"
 
-interface IHomeForumCard {
-    enterprise: string,
-    title: string,
-    model: string,
-    user: string,
-    answerCount: number,
-    views: number,
-    postDate: string
-}
 
 export default function HomeForumCard({
     enterprise,
