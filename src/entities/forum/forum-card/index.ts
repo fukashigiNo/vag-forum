@@ -1,1 +1,1 @@
-export {default as ForumCard} from "./ForumCard"
+export * from "./ui"
