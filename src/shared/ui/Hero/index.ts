@@ -1,1 +1,1 @@
-export {default as HeroLogo} from "./HeroLogo"
+export * from "./ui"
