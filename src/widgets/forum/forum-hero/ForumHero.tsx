@@ -2,8 +2,8 @@
 import { Icon } from "@/shared/ui"
 import { useState } from "react"
 import { Search, SlidersHorizontal } from "lucide-react"
-import { ForumCard } from "@/entities/forum/forum-card"
-import { ForumSettingsModal } from "@/entities/forum/forum-settings"
+import { ForumCard } from "@/entities/forum/forum-card/ui"
+import { ForumSettingsModal } from "@/entities/forum/forum-settings/ui"
 
 const mockData = [
     {
