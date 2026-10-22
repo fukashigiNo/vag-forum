@@ -9,10 +9,10 @@ interface IForumFilterSlice {
 }
 
 const initialState: IForumFilterSlice = {
-    brand: null,
-    model: null,
-    generation: null, 
-    category: null,
+    brand: "",
+    model: "",
+    generation: "", 
+    category: "",
     sort: "popular"
 }
 
@@ -23,7 +23,7 @@ export const forumFilterSlice = createSlice({
         setBrand(state, action: PayloadAction<string | null>) {
             state.brand = action.payload
 
-            state.model = null
+            state.model = ""
             state.generation = null
         },
         setModel(state, action: PayloadAction<string | null>) {
