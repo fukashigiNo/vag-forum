@@ -1,14 +1,7 @@
 import { Icon } from "@/shared/ui"
 import { Gauge, Zap } from "lucide-react"
 import { useRouter } from "next/navigation"
-
-interface IHomeRepairCard {
-    type: string,
-    dificuilty: "Easy" | "Normal" | "Hard",
-    title: string,
-    duration: string,
-    steps: number
-}
+import type { IHomeRepairCard } from "../types"
 
 export default function HomeRepairCard({
     type,
