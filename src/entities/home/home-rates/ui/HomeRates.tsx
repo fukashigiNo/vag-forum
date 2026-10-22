@@ -1,18 +1,7 @@
 import { Star } from "lucide-react"
 import { Icon } from "@/shared/ui"
 import { useRouter } from "next/navigation"
-
-interface IHomeRate {
-    rate: number
-    model: string
-    title: string
-    engine: string
-    horsePower: number
-    year: number
-    subtitle: string
-    user: string
-    date: string
-}
+import type { IHomeRate } from "../types"
 
 export default function HomeRateCard({
     rate,
