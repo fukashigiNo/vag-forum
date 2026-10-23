@@ -1,7 +1,9 @@
+export type SelectOption = string | { value: string; label: string };
+
 export interface ISelect {
     value: string | null;
     className?: string;
     itemClass?: string;
-    values: string[];
-    onChange: (e:React.ChangeEvent<HTMLSelectElement>) => void
+    values: SelectOption[];
+    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
