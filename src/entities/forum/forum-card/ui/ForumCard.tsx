@@ -20,6 +20,8 @@ export default function ForumCard({
     time,
     answers,
     views,
+    vehicle,
+    description,
 }: IForumCardProps) {
     return (
         <article 
@@ -33,7 +35,7 @@ export default function ForumCard({
 
             <div className="flex min-w-0 flex-1 items-center justify-between gap-3">
                 <div className="min-w-0">
-                    <div className="mb-1 flex items-center gap-4">
+                    <div className="mb-1 flex flex-wrap items-center gap-2 sm:gap-4">
                         {solved && (
                             <span className="flex items-center gap-1 bg-blue-500 px-2 rounded-[12px]">
                                 <Icon icon={CircleCheck} size={12} color="white" />
@@ -41,8 +43,12 @@ export default function ForumCard({
                             </span>
                         )}
                         <span className="text-white/60">{enterprise}</span>
+                        {vehicle && <span className="text-sm text-white/50">{vehicle}</span>}
                     </div>
                     <h3 className="truncate">{title}</h3>
+                    {description && (
+                        <p className="mt-1 line-clamp-2 text-sm text-white/60">{description}</p>
+                    )}
                 </div>
 
                 <div className="flex shrink-0 flex-col text-sm text-white/60">
