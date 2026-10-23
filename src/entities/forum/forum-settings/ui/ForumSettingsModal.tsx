@@ -4,7 +4,7 @@ import { Select } from "@/shared/ui"
 import { useAppDispatch } from "@/shared/store/hooks/app-dispatch"
 import type { IForumSettingsModal } from "../types"
 import { useAppSelector } from "@/shared/store/hooks/app-selector"
-import { setBrand } from "@/shared/store/slices/forum-filter-slice"
+import { setBrand, setGeneration, setModel } from "@/shared/store/slices/forum-filter-slice"
 
 const VAG_CATALOG_MOCK = [
   {
@@ -136,13 +136,36 @@ const VAG_CATALOG_MOCK = [
       },
     ],
   },
-];
+]
 
-export default function ForumSettingsModal({
-    setShow
-}: IForumSettingsModal) {
+export default function ForumSettingsModal({ setShow }: IForumSettingsModal) {
   const dispatch = useAppDispatch()
-  const brand = useAppSelector(state => state.forumFilter.brand)
+  const brand = useAppSelector((state) => state.forumFilter.brand)
+  const model = useAppSelector((state) => state.forumFilter.model)
+  const generation = useAppSelector((state) => state.forumFilter.generation)
+
+  const activeBrand = VAG_CATALOG_MOCK.find((item) => item.name === brand) ?? VAG_CATALOG_MOCK[0]
+  const activeModel = activeBrand.models.find((item) => item.name === model) ?? activeBrand.models[0]
+  const activeGeneration = activeModel.generations.find((item) => item.id === generation) ?? activeModel.generations[0]
+
+  const handleBrandChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const nextBrand = event.target.value || null
+    const nextBrandData = VAG_CATALOG_MOCK.find((item) => item.name === nextBrand)
+    const nextModel = nextBrandData?.models[0]?.name ?? null
+
+    dispatch(setBrand(nextBrand))
+    dispatch(setModel(nextModel))
+    dispatch(setGeneration(null))
+  }
+
+  const handleModelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setModel(event.target.value || null))
+    dispatch(setGeneration(null))
+  }
+
+  const handleGenerationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setGeneration(event.target.value || null))
+  }
 
   return (
     <div
@@ -150,14 +173,106 @@ export default function ForumSettingsModal({
       onClick={setShow}
     >
       <div
-        className="w-full max-w-md rounded-2xl bg-zinc-900 p-6 shadow-xl"
-        onClick={event => event.stopPropagation()}
+        className="flex h-[72vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-950 shadow-2xl"
+        onClick={(event) => event.stopPropagation()}
       >
-        <Select
-          value={brand}
-          values={VAG_CATALOG_MOCK.map(item => item.name)}
-          onChange={event => dispatch(setBrand(event.target.value || null))}
-        />
+        <div className="flex items-center justify-between border-b border-zinc-800 px-6 py-4">
+          <div>
+            <p className="text-sm uppercase tracking-[0.2em] text-blue-400">Forum settings</p>
+            <h2 className="mt-1 text-2xl font-semibold text-white">Vehicle filter</h2>
+          </div>
+
+          <button
+            type="button"
+            className="rounded-full border border-zinc-700 px-3 py-1.5 text-sm text-zinc-200 transition hover:border-zinc-500 hover:text-white"
+            onClick={setShow}
+          >
+            Close
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-6 py-5">
+          <div className="space-y-6">
+            <section className="rounded-2xl border border-zinc-800 bg-zinc-900/80 p-4">
+              <div className="grid gap-4 md:grid-cols-3">
+                <div>
+                  <label className="mb-2 block text-sm text-zinc-300">Brand</label>
+                  <Select
+                    value={brand || activeBrand.name}
+                    values={VAG_CATALOG_MOCK.map((item) => item.name)}
+                    onChange={handleBrandChange}
+                    className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-white outline-none ring-0 transition focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm text-zinc-300">Model</label>
+                  <Select
+                    value={model || activeModel.name}
+                    values={activeBrand.models.map((item) => item.name)}
+                    onChange={handleModelChange}
+                    className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-white outline-none transition focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm text-zinc-300">Generation</label>
+                  <Select
+                    value={generation || activeGeneration.id}
+                    values={activeModel.generations.map((item) => ({
+                      value: item.id,
+                      label: item.name,
+                    }))}
+                    onChange={handleGenerationChange}
+                    className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-white outline-none transition focus:border-blue-500"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section className="rounded-2xl border border-zinc-800 bg-zinc-900/80 p-4">
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="text-lg font-medium text-white">Generation details</h3>
+                <span className="text-sm text-zinc-400">{activeModel.generations.length} options</span>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2">
+                {activeModel.generations.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`rounded-2xl border p-4 ${
+                      activeGeneration.id === item.id
+                        ? "border-blue-500 bg-blue-500/10"
+                        : "border-zinc-700 bg-zinc-950"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-semibold text-white">{item.name}</span>
+                      {item.code ? (
+                        <span className="rounded-full border border-zinc-700 bg-zinc-800 px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-zinc-300">
+                          {item.code}
+                        </span>
+                      ) : null}
+                    </div>
+
+                    <p className="mt-3 text-sm text-zinc-300">{item.years}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="rounded-2xl border border-zinc-800 bg-zinc-900/80 p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">Current selection</p>
+              <div className="mt-3 flex flex-wrap gap-2 text-sm text-zinc-200">
+                <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1.5">{brand || activeBrand.name}</span>
+                <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1.5">{model || activeModel.name}</span>
+                <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1.5">
+                  {activeGeneration.name}
+                </span>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
     </div>
   )
