@@ -3,7 +3,12 @@ import { Icon } from "@/shared/ui"
 import { useState } from "react"
 import { Search, SlidersHorizontal } from "lucide-react"
 import { ForumCard } from "@/entities/forum/forum-card/ui"
+import type { IForumPost } from "@/entities/forum/forum-card/types"
 import { ForumSettingsModal } from "@/entities/forum/forum-settings/ui"
+
+interface IForumHeroProps {
+    posts: IForumPost[]
+}
 
 const mockData = [
     {
@@ -30,7 +35,7 @@ const mockData = [
     }
 ]
 
-export default function ForumHero() {
+export default function ForumHero({ posts }: IForumHeroProps) {
     const [activeCar, setActiveCar] = useState("All")
     const [active, setActive] = useState(false)
     return (
@@ -83,16 +88,21 @@ export default function ForumHero() {
                     All threads
                 </span>
                 <div>
-                    <ForumCard
-                    letter="A"
-                    solved
-                    enterprise="Engine"
-                    title="Lorem ipsum dolor sit amet consectetur"
-                    user="Rozik911"
-                    time="5 h. ago"
-                    answers={47}    
-                    views={1290}
-                    />
+                    {posts.map((post) => (
+                        <ForumCard
+                            key={post.id}
+                            letter={post.title.charAt(0).toUpperCase()}
+                            solved={post.solved}
+                            enterprise={post.enterprise}
+                            title={post.title}
+                            user={post.user}
+                            time={post.time}
+                            answers={post.answers}
+                            views={post.views}
+                            vehicle={post.vehicle}
+                            description={post.description}
+                        />
+                    ))}
                 </div>
         </div>
     )
