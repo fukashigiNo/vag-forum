@@ -7,12 +7,18 @@ export interface IForumCardProps {
     time: string
     answers: number
     views: number
+    brand?: string
+    model?: string
+    body?: string
     vehicle?: string
     description?: string
 }
 
 export interface IForumPost extends IForumCardProps {
     id: string
+    brand: string
+    model: string
+    body: string
 }
 
 export interface IStatProps {
