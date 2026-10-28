@@ -13,6 +13,9 @@ const INITIAL_POSTS: IForumPost[] = [
         solved: true,
         enterprise: "Engine",
         title: "Lorem ipsum dolor sit amet consectetur",
+        brand: "Audi",
+        model: "A4",
+        body: "B8",
         user: "Rozik911",
         time: "5 h. ago",
         answers: 47,
@@ -28,12 +31,16 @@ export default function Forum() {
         title: string
         enterprise: string
         description: string
+        letter: string
+        brand: string
+        model: string
+        body: string
         vehicle?: string
     }) => {
         setPosts((currentPosts) => [
             {
                 id: `post-${Date.now()}`,
-                letter: post.title.charAt(0).toUpperCase(),
+                letter: post.brand.charAt(0).toUpperCase(),
                 solved: false,
                 enterprise: post.enterprise,
                 title: post.title,
@@ -41,6 +48,9 @@ export default function Forum() {
                 time: "Just now",
                 answers: 0,
                 views: 0,
+                brand: post.brand,
+                model: post.model,
+                body: post.body,
                 description: post.description,
                 vehicle: post.vehicle,
             },
