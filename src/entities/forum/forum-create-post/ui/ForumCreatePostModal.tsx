@@ -16,6 +16,7 @@ export default function ForumCreatePostModal({
   const [description, setDescription] = useState("")
   const [brand, setBrand] = useState("")
   const [model, setModel] = useState("")
+  const [body, setBody] = useState("")
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -29,12 +30,21 @@ export default function ForumCreatePostModal({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const vehicle = [brand, model.trim()].filter(Boolean).join(" ")
+    const normalizedBrand = brand.trim()
+    const normalizedModel = model.trim()
+    const normalizedBody = body.trim()
+    if (!normalizedBrand || !normalizedModel || !normalizedBody) return
+
+    const vehicle = [normalizedBrand, normalizedModel, normalizedBody].join(" ")
     onCreatePost({
       title: title.trim(),
       enterprise,
       description: description.trim(),
-      ...(vehicle ? { vehicle } : {}),
+      letter: normalizedBrand.charAt(0).toUpperCase(),
+      brand: normalizedBrand,
+      model: normalizedModel,
+      body: normalizedBody,
+      vehicle,
     })
   }
 
@@ -107,10 +117,11 @@ export default function ForumCreatePostModal({
 
             <div>
               <label htmlFor="post-brand" className="mb-2 block text-sm font-medium text-zinc-200">
-                Brand <span className="text-zinc-500">(optional)</span>
+                Brand
               </label>
               <Select
                 id="post-brand"
+                required
                 value={brand}
                 values={BRANDS}
                 onChange={(event) => setBrand(event.target.value)}
@@ -121,14 +132,32 @@ export default function ForumCreatePostModal({
 
           <div>
             <label htmlFor="post-model" className="mb-2 block text-sm font-medium text-zinc-200">
-              Model <span className="text-zinc-500">(optional)</span>
+              Model
             </label>
             <input
               id="post-model"
+              required
+              pattern=".*\S.*"
               maxLength={60}
               value={model}
               onChange={(event) => setModel(event.target.value)}
-              placeholder="e.g. Golf Mk7 2.0 TSI"
+              placeholder="e.g. Golf 2.0 TSI"
+              className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-white outline-none transition placeholder:text-zinc-500 focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="post-body" className="mb-2 block text-sm font-medium text-zinc-200">
+              Body
+            </label>
+            <input
+              id="post-body"
+              required
+              pattern=".*\S.*"
+              maxLength={60}
+              value={body}
+              onChange={(event) => setBody(event.target.value)}
+              placeholder="e.g. Mk7, B8, 8V"
               className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-white outline-none transition placeholder:text-zinc-500 focus:border-blue-500"
             />
           </div>
