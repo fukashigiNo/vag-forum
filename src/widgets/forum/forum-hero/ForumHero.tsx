@@ -81,20 +81,6 @@ export default function ForumHero({ posts }: IForumHeroProps) {
                             handlePress={() => {}}
                         />
 
-                        {/* <button
-                             key={item.id}
-                             onClick={() => setActiveCar(item.car)}
-                             aria-pressed={activeCar === item.car}
-                            className={`ml-4 rounded-full border border-zinc-700 px-2 py-1 text-[14px] cursor-pointer
-                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 ${
-                                    activeCar === item.car
-                                     ? "bg-blue-500 text-white"
-                                     : "text-white/70 hover:text-white"
-                             }`}
-                         >
-                             {item.car}
-                         </button> */}
-
                         <button 
                             className="ml-4 cursor-pointer"
                             onClick={() => {setActive(prevState => !prevState )}}
