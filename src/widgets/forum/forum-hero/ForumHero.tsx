@@ -1,55 +1,38 @@
 "use client"
-import { Icon } from "@/shared/ui"
 import { useState } from "react"
+import { Icon } from "@/shared/ui"
 import { Search, SlidersHorizontal } from "lucide-react"
-import { ForumCard } from "@/entities/forum/forum-card/ui"
-import type { IForumPost } from "@/entities/forum/forum-card/types"
-import { ForumSettingsModal } from "@/entities/forum/forum-settings/ui"
+// Shared
 import { HorizontalList } from "@/shared/ui/horizontal-list"
+import { setBrand } from "@/shared/store/slices/forum-filter-slice"
+import { useAppSelector } from "@/shared/store/hooks/app-selector"
+import { useAppDispatch } from "@/shared/store/hooks/app-dispatch"
+// Entites
+import { ForumCard } from "@/entities/forum/forum-card/ui"
+import { ForumSettingsModal } from "@/entities/forum/forum-settings/ui"
+import type { IForumPost } from "@/entities/forum/forum-card/types"
+//feature
+import { useForumFilter } from "@/features/forum/forum-filter/api"
 
 interface IForumHeroProps {
     posts: IForumPost[]
 }
 
-const mockData = [
-    {
-        id: 0,
-        car: "All"
-    },{
-        id: 1,
-        car: "Volkswagen",
-    },{
-        id: 2,
-        car: "Audi",
-    },{
-        id: 3,
-        car: "Skoda",
-    },{
-        id: 4,
-        car: "SEAT",
-    },{
-        id: 5,
-        car: "CUPRA",
-    },{
-        id: 6,
-        car: "Porsche",
-    }
-]
-
 const mockDataa = ["All", "Volkswagen", "Audi", "Skoda", "SEAT", "CUPRA"]
 
 export default function ForumHero({ posts }: IForumHeroProps) {
-    const [activeCar, setActiveCar] = useState("All")
     const [active, setActive] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
+
+    const brand = useAppSelector(state => state.forumFilter.brand)
+    const model = useAppSelector(state => state.forumFilter.model)
+    const generation = useAppSelector(state => state.forumFilter.generation)
+    
     const normalizedQuery = searchQuery.trim().toLocaleLowerCase()
-    const filteredPosts = normalizedQuery
-        ? posts.filter((post) =>
-            [post.title, post.brand, post.model, post.body]
-                .some((value) => value?.toLocaleLowerCase().includes(normalizedQuery))
-        )
-        : posts
-    let index = 0
+    const dispatch = useAppDispatch()
+    
+    const ForumFilter = useForumFilter({posts, normalizedQuery, brand, model, generation})
+
     return (
         <div className="mt-6">
             <div className="flex mb-5 px-4">
@@ -73,12 +56,12 @@ export default function ForumHero({ posts }: IForumHeroProps) {
 
                 <div className="flex items-center">
                         <HorizontalList
-                            key={index++}
                             list={mockDataa}
-                            itemClassName={`ml-4 rounded-full text-white border border-zinc-700 px-2 py-1 text-[14px] cursor-pointer
-                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400`}
-                            activeFilter=""
-                            handlePress={() => {}}
+                            itemClassName={`ml-4 rounded-full text-white border border-zinc-700 px-2 py-1 text-[14px] cursor-pointer`}
+                            activeFilter={brand ?? "All"}
+                            handlePress={(item) => {
+                               dispatch(setBrand(item === "All" ? null : item))
+                            }}
                         />
 
                         <button 
@@ -96,7 +79,7 @@ export default function ForumHero({ posts }: IForumHeroProps) {
                     All threads
                 </span>
                 <div>
-                    {filteredPosts.length > 0 ? filteredPosts.map((post) => (
+                    {ForumFilter.length > 0 ? ForumFilter.map((post: any) => (
                         <ForumCard
                             key={post.id}
                             letter={post.letter}
