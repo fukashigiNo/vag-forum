@@ -150,12 +150,8 @@ export default function ForumSettingsModal({ setShow }: IForumSettingsModal) {
 
   const handleBrandChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const nextBrand = event.target.value || null
-    const nextBrandData = VAG_CATALOG_MOCK.find((item) => item.name === nextBrand)
-    const nextModel = nextBrandData?.models[0]?.name ?? null
-
     dispatch(setBrand(nextBrand))
-    dispatch(setModel(nextModel))
-    dispatch(setGeneration(null))
+
   }
 
   const handleModelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -198,7 +194,7 @@ export default function ForumSettingsModal({ setShow }: IForumSettingsModal) {
                 <div>
                   <label className="mb-2 block text-sm text-zinc-300">Brand</label>
                   <Select
-                    value={brand || activeBrand.name}
+                    value={brand ?? ""}
                     values={VAG_CATALOG_MOCK.map((item) => item.name)}
                     onChange={handleBrandChange}
                     className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-white outline-none ring-0 transition focus:border-blue-500"
@@ -208,7 +204,7 @@ export default function ForumSettingsModal({ setShow }: IForumSettingsModal) {
                 <div>
                   <label className="mb-2 block text-sm text-zinc-300">Model</label>
                   <Select
-                    value={model || activeModel.name}
+                    value={model ?? ""}
                     values={activeBrand.models.map((item) => item.name)}
                     onChange={handleModelChange}
                     className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-white outline-none transition focus:border-blue-500"
@@ -218,7 +214,7 @@ export default function ForumSettingsModal({ setShow }: IForumSettingsModal) {
                 <div>
                   <label className="mb-2 block text-sm text-zinc-300">Generation</label>
                   <Select
-                    value={generation || activeGeneration.id}
+                    value={generation ?? ""}
                     values={activeModel.generations.map((item) => ({
                       value: item.id,
                       label: item.name,
@@ -237,11 +233,11 @@ export default function ForumSettingsModal({ setShow }: IForumSettingsModal) {
               </div>
 
               <div className="grid gap-3 md:grid-cols-2">
-                {activeModel.generations.map((item) => (
+                {model ? activeModel.generations.map((item) => (
                   <div
                     key={item.id}
                     className={`rounded-2xl border p-4 ${
-                      activeGeneration.id === item.id
+                      generation === item.id
                         ? "border-blue-500 bg-blue-500/10"
                         : "border-zinc-700 bg-zinc-950"
                     }`}
@@ -257,17 +253,19 @@ export default function ForumSettingsModal({ setShow }: IForumSettingsModal) {
 
                     <p className="mt-3 text-sm text-zinc-300">{item.years}</p>
                   </div>
-                ))}
+                )) 
+                : <span className="text-blue-500 text-[20px]">Generations is not picked <br />:-(</span>
+                }
               </div>
             </section>
 
             <section className="rounded-2xl border border-zinc-800 bg-zinc-900/80 p-4">
               <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">Current selection</p>
               <div className="mt-3 flex flex-wrap gap-2 text-sm text-zinc-200">
-                <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1.5">{brand || activeBrand.name}</span>
-                <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1.5">{model || activeModel.name}</span>
+                <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1.5">{brand || "Brand is not picked<3"}</span>
+                <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1.5">{model  || "Model is not picked"}</span>
                 <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1.5">
-                  {activeGeneration.name}
+                  {generation ?? "Generation is not picked"}
                 </span>
               </div>
             </section>
