@@ -1,0 +1,1 @@
+export {default as useForumFilter} from "./useForumFilter.feature"
