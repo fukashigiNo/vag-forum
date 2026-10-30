@@ -9,7 +9,7 @@ interface IForumFilterSlice {
 }
 
 const initialState: IForumFilterSlice = {
-    brand: "",
+    brand: "All",
     model: "",
     generation: "", 
     category: "",
