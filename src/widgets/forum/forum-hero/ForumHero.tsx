@@ -79,9 +79,10 @@ export default function ForumHero({ posts }: IForumHeroProps) {
                     All threads
                 </span>
                 <div>
-                    {ForumFilter.length > 0 ? ForumFilter.map((post: any) => (
+                    {ForumFilter.length > 0 ? ForumFilter.map((post: IForumPost) => (
                         <ForumCard
                             key={post.id}
+                            id={post.id}
                             letter={post.letter}
                             solved={post.solved}
                             enterprise={post.enterprise}
