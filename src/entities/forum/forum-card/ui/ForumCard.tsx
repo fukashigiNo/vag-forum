@@ -1,4 +1,6 @@
 import { CircleCheck } from "lucide-react"
+import { useRouter } from "next/navigation"
+import type { KeyboardEvent } from "react"
 import { Icon } from "@/shared/ui"
 import type { IForumCardProps, IStatProps } from "../types"
 
@@ -12,6 +14,7 @@ function Stat({ value, label }: IStatProps) {
 }
 
 export default function ForumCard({
+    id,
     letter,
     solved,
     enterprise,
@@ -22,12 +25,35 @@ export default function ForumCard({
     views,
     vehicle,
     description,
+    onClick,
 }: IForumCardProps) {
+    const router = useRouter()
+
+    const handleClick = () => {
+        if (onClick) {
+            onClick()
+            return
+        }
+
+        if (id) {
+            router.push(`/forum/${id}`)
+        }
+    }
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault()
+            handleClick()
+        }
+    }
+
     return (
-        <article 
-            className="mx-auto flex w-[98%] items-center gap-4 rounded-xl border 
-            border-white/30 bg-zinc-800 p-5 text-white mt-5 cursor-pointer hover:border-blue-600"
-            onClick={() => {}}
+        <article
+            role="button"
+            tabIndex={0}
+            className="mx-auto mt-5 flex w-[98%] cursor-pointer items-center gap-4 rounded-xl border border-white/30 bg-zinc-800 p-5 text-white transition-colors hover:border-blue-600 focus:outline-none focus-visible:border-blue-600"
+            onClick={handleClick}
+            onKeyDown={handleKeyDown}
         >
             <div className="shrink-0 rounded-xl bg-blue-500 px-4 py-3 font-bold">
                 {letter}
@@ -37,9 +63,9 @@ export default function ForumCard({
                 <div className="min-w-0">
                     <div className="mb-1 flex flex-wrap items-center gap-2 sm:gap-4">
                         {solved && (
-                            <span className="flex items-center gap-1 bg-blue-500 px-2 rounded-[12px]">
+                            <span className="flex items-center gap-1 rounded-[12px] bg-blue-500 px-2">
                                 <Icon icon={CircleCheck} size={12} color="white" />
-                                <span className="text-white text-[13px]">SOLVED</span>
+                                <span className="text-[13px] text-white">SOLVED</span>
                             </span>
                         )}
                         <span className="text-white/60">{enterprise}</span>
