@@ -1,4 +1,13 @@
+export interface IForumReply {
+    id: string
+    user: string
+    time: string
+    role?: "author" | "moderator" | "member"
+    body: string
+}
+
 export interface IForumCardProps {
+    id?: string
     letter: string
     solved: boolean
     enterprise: string
@@ -12,6 +21,10 @@ export interface IForumCardProps {
     body?: string
     vehicle?: string
     description?: string
+    replies?: IForumReply[]
+    helpful?: number
+    helpfulByCurrentUser?: boolean
+    onClick?: () => void
 }
 
 export interface IForumPost extends IForumCardProps {
@@ -19,6 +32,10 @@ export interface IForumPost extends IForumCardProps {
     brand: string
     model: string
     body: string
+}
+
+export interface IForumThreadProps extends IForumPost {
+    replies?: IForumReply[]
 }
 
 export interface IStatProps {
