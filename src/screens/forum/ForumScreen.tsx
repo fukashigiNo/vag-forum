@@ -1,31 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import { useAppDispatch } from "@/shared/store/hooks/app-dispatch"
+import { useAppSelector } from "@/shared/store/hooks/app-selector"
+import { addForumPost } from "@/shared/store/slices/forum-thread-slice/forumThreads.slice"
 import { ForumCreatePostModal } from "@/entities/forum/forum-create-post"
-import type { IForumPost } from "@/entities/forum/forum-card/types"
 import { ForumHeader } from "@/widgets/forum/forum-header"
 import { ForumHero } from "@/widgets/forum/forum-hero"
 
-const INITIAL_POSTS: IForumPost[] = [
-    {
-        id: "mock-engine-topic",
-        letter: "A",
-        solved: true,
-        enterprise: "Engine",
-        title: "Lorem ipsum dolor sit amet consectetur",
-        brand: "Audi",
-        model: "A4",
-        body: "B8",
-        user: "Rozik911",
-        time: "5 h. ago",
-        answers: 47,
-        views: 1290,
-    },
-]
-
 export default function Forum() {
-    const [posts, setPosts] = useState(INITIAL_POSTS)
     const [isCreatePostOpen, setIsCreatePostOpen] = useState(false)
+    const dispatch = useAppDispatch()
+    const posts = useAppSelector((state) => state.forumThreads.posts)
 
     const handleCreatePost = (post: {
         title: string
@@ -37,8 +23,7 @@ export default function Forum() {
         body: string
         vehicle?: string
     }) => {
-        setPosts((currentPosts) => [
-            {
+        dispatch(addForumPost({
                 id: `post-${Date.now()}`,
                 letter: post.brand.charAt(0).toUpperCase(),
                 solved: false,
@@ -53,9 +38,10 @@ export default function Forum() {
                 body: post.body,
                 description: post.description,
                 vehicle: post.vehicle,
-            },
-            ...currentPosts,
-        ])
+                replies: [],
+                helpful: 0,
+                helpfulByCurrentUser: false,
+            }))
         setIsCreatePostOpen(false)
     }
 
