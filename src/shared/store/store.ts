@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { forumFilterSlice } from "./slices/forum-filter-slice";
+import { forumThreadsSlice } from "./slices/forum-thread-slice"
 
 export const Store = configureStore({
     reducer: {
-        forumFilter: forumFilterSlice.reducer
+        forumFilter: forumFilterSlice.reducer,
+        forumThreads: forumThreadsSlice.reducer,
     }
 })
 
