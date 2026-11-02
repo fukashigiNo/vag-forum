@@ -38,15 +38,15 @@ export default function Hero() {
 
             <div className="hidden md:flex w-1/2 justify-end absolute right-0 pointer-events-none z-0">
                 <motion.img
-                    src="/Audi-A5.png" /* Замени на путь к твоей картинке в папке public */
+                    src="/Audi-A5.png" 
                     alt="VAG Car"
                     initial={{ x: '50vw', opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{
-                        type: 'spring',  // Эффект пружины для имитации подвески/тормозов
-                        stiffness: 15,   // Жесткость пружины
+                        type: 'spring',  
+                        stiffness: 15,   
                         duration: 5,
-                        delay: 0.1       // Легкая задержка перед стартом анимации
+                        delay: 0.1       
                     }}
                     className="w-full max-w-[800px] object-contain"
                 />
