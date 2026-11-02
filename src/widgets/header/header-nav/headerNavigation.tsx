@@ -25,13 +25,26 @@ const mockData = [
     }
 ]
 
-export default function HeaderNavigation() {
+interface HeaderNavigationProps {
+    mobile?: boolean
+    onNavigate?: () => void
+}
+
+export default function HeaderNavigation({
+    mobile = false,
+    onNavigate,
+}: HeaderNavigationProps) {
     return (
-        <nav>
-            <ul className="flex flex-row">
+        <nav aria-label={mobile ? "Основная навигация" : undefined}>
+            <ul className={`flex ${mobile ? "flex-col gap-1" : "flex-row"}`}>
                 {mockData.map((item) => (
                     <li key={item.id}>
-                        <NavLink  title={item.name} href={item.path} />
+                        <NavLink
+                            title={item.name}
+                            href={item.path}
+                            onClick={onNavigate}
+                            className={mobile ? "block rounded-lg px-4 py-3" : "block px-4 py-2"}
+                        />
                     </li>
                 ))}
             </ul>
