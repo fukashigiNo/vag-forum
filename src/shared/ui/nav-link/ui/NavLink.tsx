@@ -9,11 +9,13 @@ import type { INavLink } from "../types";
 export default function NavLink({
     href,
     title,
+    className = "relative block px-4 py-2 text-[14px]",
+    onClick,
 }: INavLink) {
     const isActive = useActiveLink(href)
 
     return (
-        <Link href={href} className="relative px-4 py-2 text-[14px]">
+        <Link href={href} onClick={onClick} className={`relative text-[14px] ${className}`}>
             
             {isActive && (
                 <motion.span
