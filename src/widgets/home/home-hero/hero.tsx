@@ -27,7 +27,7 @@ export default function Hero() {
                     </Link>
 
                     <Link 
-                        href={"/forum"} 
+                        href={"/login"} 
                         className="flex items-center justify-center text-white gap-3 border border-zinc-500 bg-zinc-800 px-3 py-2 rounded-[13px]"
                     >
                         <Icon icon={User} size={16} color="white" />
