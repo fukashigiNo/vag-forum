@@ -30,60 +30,55 @@ const comunity = ["Rules", "Contacts", "Confidentiality", "Feedback"]
 
 export default function Footer() {
     return (
-        <footer className=" bg-zinc-800 p-10 border-t border-t-white/30">
-            <div className="flex justify-between w-[80%]">
-                <div>
-                    <div className="flex items-center gap-3 mb-4">
-                        <span 
-                            className="text-[18px] text-blue-500 tracking-tighter 
-                            font-bold bg-blue-900/60 py-2 px-1 rounded-[13px] border border-blue-500"
-                        >   
-                                VAG
+        <footer className="border-t border-white/20 bg-zinc-800 px-5 py-8 sm:px-8 sm:py-10">
+            <div className="mx-auto grid max-w-screen-xl gap-8 sm:grid-cols-2 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
+                <section>
+                    <Link href="/" aria-label="VAG Forum — на главную" className="mb-4 inline-flex items-center gap-3">
+                        <span className="rounded-xl border border-blue-500 bg-blue-900/60 px-2 py-1.5 text-lg font-bold tracking-tighter text-blue-400">
+                            VAG
                         </span>
-                        <span 
-                            className="flex text-[18px] text-white tracking-tighter font-bold"
-                        >
-                                FORUM 
-                                <p className="text-blue-500">.</p>
+                        <span className="flex text-lg font-bold tracking-tighter text-white">
+                            FORUM<span className="text-blue-500">.</span>
                         </span>
-                    </div>
-                    <span className="text-white/60 text-[14px] tracking-tighter ">
-                        Independent communities of owners and enthusiasts <br />
-                        of VAG Group vehicles — Volkswagen, Audi, Škoda, <br />
-                        SEAT, Porsche, Bentley, Lamborghini, and Bugatti.
-                    </span>
-                </div>
-                <div>
-                    <span className="text-14px font-bold tracking-tighter dark:text-white">Navigation</span>
-                    {mockData.map((item) =>(
-                        <Link 
-                            href={item.path}
-                            key={item.id}
-                            className="flex text-gray-300 items-center hover:text-white"
-                        >
-                        <p className="mt-2"> {item.name}</p>
-                        </Link> 
-                    ))}
-                </div>
-                <div>
-                    <span className="text-14px font-bold tracking-tighter mb-4 dark:text-white">Comunity</span>
-                        {comunity.map((item) => (
-                            <p
-                                className="flex text-gray-300  mt-2 items-center hover:text-white"
-                                key={item}
-                            >
-                                {item}
-                            </p>
+                    </Link>
+                    <p className="max-w-md text-sm leading-6 text-white/60">
+                        Independent communities of owners and enthusiasts of VAG Group vehicles —
+                        Volkswagen, Audi, Škoda, SEAT, Porsche, Bentley, Lamborghini, and Bugatti.
+                    </p>
+                </section>
+
+                <nav aria-label="Footer navigation">
+                    <h2 className="mb-3 text-sm font-bold tracking-tight text-white">Navigation</h2>
+                    <ul className="space-y-2">
+                        {mockData.map((item) => (
+                            <li key={item.id}>
+                                <Link
+                                    href={item.path}
+                                    className="text-sm text-gray-300 transition-colors hover:text-white"
+                                >
+                                    {item.name}
+                                </Link>
+                            </li>
                         ))}
-                </div>
+                    </ul>
+                </nav>
+
+                <section>
+                    <h2 className="mb-3 text-sm font-bold tracking-tight text-white">Community</h2>
+                    <ul className="space-y-2">
+                        {comunity.map((item) => (
+                            <li key={item}>
+                                <span className="text-sm text-gray-300">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
             </div>
-            <div className="mt-4">
-                <div className="w-[95%] mx-auto h-[1px] border border-t-white/30 mb-4" />
-                <span 
-                    className="text-white/60 text-[12px]"
-                >
+
+            <div className="mx-auto mt-8 max-w-screen-xl border-t border-white/20 pt-4">
+                <p className="text-center text-xs leading-5 text-white/60 sm:text-left">
                     © 2026 VAG-FORUM. Не аффилирован с Volkswagen AG.
-                </span>
+                </p>
             </div>
         </footer>
     )
