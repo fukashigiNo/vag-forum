@@ -20,15 +20,13 @@ export default function HomeRateCard({
     }
     return ( 
         <div 
-            className="h-[400px] w-[400px] bg-[#222224] border border-white/30 
-            rounded-[16px] mt-6 hover:border-blue-600 transition-colors 
-            overflow-hidden flex flex-col"
-            onClick={handleClick}
+           className="mt-4 flex h-full min-h-[22rem] w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-800/80 transition-colors hover:border-blue-500"
+           onClick={handleClick}
         >
             
-            <div className="relative h-[220px] w-full bg-[#2e3136] shrink-0">
-                <div className="absolute bottom-3 left-0 w-full flex justify-between px-4">
-                    <div className="flex items-center gap-1 bg-black/60 px-2 py-1 rounded-[20px] backdrop-blur-sm">
+           <div className="relative h-36 w-full shrink-0 bg-gradient-to-br from-zinc-700 to-zinc-900 sm:h-44">
+               <div className="absolute bottom-3 left-0 flex w-full justify-between px-3 sm:px-4">
+                   <div className="flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 backdrop-blur-sm">
                         <Icon icon={Star} size={16} color="yellow" fill="yellow" />
                         <span className="text-white text-sm font-semibold">
                             {rate.toFixed(1)}
@@ -40,7 +38,7 @@ export default function HomeRateCard({
                 </div>
             </div>
 
-            <div className="flex flex-col flex-1 p-4 justify-between">
+            <div className="flex flex-1 flex-col justify-between p-4">
                 <div>
                     <div className="flex justify-between items-start mb-1">
                         <h3 className="text-white text-lg font-bold line-clamp-1">{title}</h3>
@@ -51,7 +49,7 @@ export default function HomeRateCard({
                         {subtitle}
                     </p>
                     
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                         <span className="text-[12px] font-medium bg-white/10 text-white px-2 py-1 rounded-md">
                             {engine}
                         </span>

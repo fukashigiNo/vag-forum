@@ -23,8 +23,7 @@ export default function HomeRepairCard({
 
     return (
         <div 
-            className="flex flex-col gap-2 bg-[#222224] p-4 w-[400px] h-[150px] rounded-[16px] border border-white/30 
-            hover:border-blue-600 mt-3 transition-colors"
+            className="mt-3 flex h-full min-h-40 w-full min-w-0 cursor-pointer flex-col gap-3 rounded-2xl border border-white/10 bg-zinc-800/80 p-4 transition-colors hover:border-blue-500"
             onClick={handleClick}
             >
             <div className="flex justify-between items-center">
@@ -40,8 +39,8 @@ export default function HomeRepairCard({
                     {dificuilty}
                 </span>
             </div>
-            <span className="text-white tracking-tight font-bold">{title}</span>
-            <div className="flex gap-2 mt-4">
+            <span className="text-white font-bold tracking-tight">{title}</span>
+            <div className="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-2">
                 <span className="flex gap-1 items-center text-white/50 text-[12px]">
                     <Icon icon={Gauge} color="gray" size={13} />
                     {duration}
