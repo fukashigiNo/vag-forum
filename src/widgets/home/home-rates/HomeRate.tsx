@@ -5,7 +5,7 @@ import { Star } from "lucide-react"
 
 export default function HomeRate() {
     return (
-        <section className="mt-10 py-10 border-t border-t-white/20">
+        <section className="mt-10 border-t border-white/10 py-8 sm:py-10">
             <HeroLogo
                 title="Rates from owners"
                 subTitle="Real expierence of usage"
@@ -13,7 +13,7 @@ export default function HomeRate() {
                 urlTitle="to the rate"
                 icon={Star}
             />
-            <div className="grid grid-cols-3 ">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {carReviews.slice(0, 3).map((item) => (
                 <HomeRatesCard
                     key={item.id}

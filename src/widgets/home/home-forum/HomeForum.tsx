@@ -1,8 +1,7 @@
 "use client"
 import { HeroLogo } from "@/shared/ui"
-import { MessageSquare, ArrowRight } from "lucide-react"
+import { MessageSquare } from "lucide-react"
 import { HomeForumCard } from "@/entities/home/home-forum"
-import Link from "next/link"
 
 export const forumThreads = [
   {
@@ -53,7 +52,7 @@ export const forumThreads = [
 
 export default function HomeForum() {
     return (
-        <section className="mt-20">
+        <section className="mt-12 border-t border-white/10 pt-8 sm:mt-16 sm:pt-10">
             <HeroLogo 
                 title="Hot in the forum" 
                 subTitle="Fresh titles from comunity" 
@@ -62,7 +61,7 @@ export default function HomeForum() {
                 icon={MessageSquare}
             />
             
-            <div className="mt-5 grid grid-cols-2 gap-4">
+            <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2">
                 {forumThreads.map((item) => (
                     <HomeForumCard
                     key={item.id}

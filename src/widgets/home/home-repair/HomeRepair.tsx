@@ -31,8 +31,8 @@ export const mockHomeRepairs = [
 
 export default function HomeRepair() {
     return (
-        <section className="mt-10 border-t border-t-white/30">
-            <div className="mt-10">
+        <section className="mt-10 border-t border-white/10 pt-8 sm:pt-10">
+            <div>
                 <HeroLogo 
                     title="Guide for repair"
                     subTitle="Step-by-step instructions using the tool"
@@ -41,7 +41,7 @@ export default function HomeRepair() {
                     icon={Wrench}
                 />
              </div>
-             <div className="mt-10 grid grid-cols-3">
+             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {mockHomeRepairs.map((item) => (
                     <HomeRepairCard 
                     key={item.id}

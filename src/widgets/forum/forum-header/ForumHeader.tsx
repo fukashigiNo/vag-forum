@@ -8,7 +8,7 @@ interface IForumHeaderProps {
 
 export default function ForumHeader({ onCreatePost }: IForumHeaderProps) {
     return (
-    <div className="flex justify-between items-center px-4 py-2">
+    <div className="mb-6 flex flex-col justify-between gap-4 py-2 sm:flex-row sm:items-center">
         <header className="mb-8">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
                     Страница обсуждения
@@ -17,14 +17,12 @@ export default function ForumHeader({ onCreatePost }: IForumHeaderProps) {
                         Форум
                 </h1>
             </header>
-        <div>
-            <button className="flex gap-2 items-center bg-blue-600/30 
-            text-white px-3 py-1 rounded-[13px] border border-blue-500 cursor-pointer
-            hover:bg-blue-600/50 transition-colors"
+        <div className="sm:mb-8">
+            <button className="flex items-center justify-center gap-2 rounded-xl border border-blue-500 bg-blue-600 px-4 py-2.5 font-medium text-white transition-colors hover:bg-blue-500"
             onClick={onCreatePost}
             >
                 <Icon icon={Plus} color="white" size={18} />
-                Create Post
+                Создать тему
             </button>
         </div>
     </div>

@@ -6,11 +6,11 @@ import { HomeRepair } from "@/widgets/home/home-repair"
 
 export default function Home() {
     return (
-        <>
+        <div className="mx-auto w-full max-w-screen-2xl">
             <Hero />
             <HomeForum />
             <HomeRate />
             <HomeRepair />
-        </>
+        </div>
     )
 }

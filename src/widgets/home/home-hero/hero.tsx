@@ -6,37 +6,40 @@ import { motion } from "framer-motion"
 
 export default function Hero() {
     return (
-        <div className="pt-20 flex justify-between items-center relative overflow-hidden w-full">
-            
-            <div className="w-full md:w-1/2 z-10 relative">
-                <h1 className="text-6xl text-white tracking-tight">All about your <br /> VAG-car in —  one <br /> site</h1>
-                <div className="mt-5">
-                    <p className="text-zinc-400">
-                        A forum, reviews, and guides on repairs and personal garages for owners <br />
-                        of Volkswagen, Audi, Škoda, SEAT, Porsche, and Bentley vehicles. Real-world experience shared <br />
-                        by actual owners.
+        <section className="relative isolate flex min-h-[26rem] items-center overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-950 px-6 py-12 sm:px-10 lg:min-h-[34rem] lg:px-14">
+            <div className="relative z-10 w-full md:max-w-[58%]">
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
+                    Сообщество владельцев VAG
+                </p>
+                <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                    Всё о вашем VAG — в одном месте
+                </h1>
+                <div className="mt-5 max-w-2xl">
+                    <p className="leading-7 text-zinc-300">
+                        Форум, отзывы и руководства по ремонту для владельцев Volkswagen,
+                        Audi, Škoda, SEAT, Porsche и других автомобилей.
                     </p>
                 </div>
-                <div className="flex gap-8 mt-5">
+                <div className="mt-7 flex flex-wrap gap-3">
                     <Link 
                         href={"/forum"} 
-                        className="flex items-center text-white gap-3 bg-blue-500 px-3 py-2 rounded-[13px]"
+                        className="flex items-center gap-3 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition-colors hover:bg-blue-500"
                     >
-                        To the forum 
+                        На форум 
                         <Icon icon={ArrowRight} size={16} color="white" />
                     </Link>
 
                     <Link 
-                        href={"/login"} 
-                        className="flex items-center justify-center text-white gap-3 border border-zinc-500 bg-zinc-800 px-3 py-2 rounded-[13px]"
+                        href={"/register"} 
+                        className="flex items-center justify-center gap-3 rounded-xl border border-white/15 bg-zinc-800/80 px-5 py-3 font-medium text-white transition-colors hover:border-blue-500"
                     >
                         <Icon icon={User} size={16} color="white" />
-                        Join us
+                        Присоединиться
                     </Link>
                 </div>
             </div>
 
-            <div className="hidden md:flex w-1/2 justify-end absolute right-0 pointer-events-none z-0">
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[55%] items-center justify-end md:flex">
                 <motion.img
                     src="/Audi-A5.png" 
                     alt="VAG Car"
@@ -48,9 +51,9 @@ export default function Hero() {
                         duration: 5,
                         delay: 0.1       
                     }}
-                    className="w-full max-w-[800px] object-contain"
+                    className="h-full max-h-[34rem] w-full object-contain object-right opacity-90"
                 />
             </div>
-        </div>
+        </section>
     )
 }

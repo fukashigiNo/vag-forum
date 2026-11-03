@@ -35,9 +35,9 @@ export default function ForumHero({ posts }: IForumHeroProps) {
 
     return (
         <div className="mt-6">
-            <div className="flex mb-5 px-4">
+            <div className="mb-6 flex flex-col gap-4 rounded-2xl border border-white/10 bg-zinc-800/50 p-4 md:p-5">
                 <label
-                    className="relative flex w-[60%] items-center rounded-[12px] border-2 border-zinc-700 bg-zinc-800 p-2 focus-within:border-blue-500"
+                    className="relative flex w-full items-center rounded-xl border border-zinc-700 bg-zinc-900 p-3 transition-colors focus-within:border-blue-500"
                 >
                     <Icon 
                         icon={Search}
@@ -50,34 +50,35 @@ export default function ForumHero({ posts }: IForumHeroProps) {
                         value={searchQuery}
                         onChange={(event) => setSearchQuery(event.target.value)}
                         placeholder="Search themes or models of your car..."
-                        className="w-full bg-transparent pl-8 text-white outline-none placeholder:text-zinc-400"
+                        className="w-full bg-transparent pl-8 text-white outline-none placeholder:text-zinc-500"
                     />
                 </label>
 
-                <div className="flex items-center">
-                        <HorizontalList
-                            list={mockDataa}
-                            itemClassName={`ml-4 rounded-full text-white border border-zinc-700 px-2 py-1 text-[14px] cursor-pointer`}
-                            activeFilter={brand ?? "All"}
-                            handlePress={(item) => {
-                               dispatch(setBrand(item === "All" ? null : item))
-                            }}
-                        />
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                    <HorizontalList
+                        list={mockDataa}
+                        itemClassName="rounded-full border border-zinc-700 px-3 py-1.5 text-sm text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white"
+                        activeFilter={brand ?? "All"}
+                        handlePress={(item) => {
+                            dispatch(setBrand(item === "All" ? null : item))
+                        }}
+                    />
 
-                        <button 
-                            className="ml-4 cursor-pointer"
-                            onClick={() => {setActive(prevState => !prevState )}}
-                        >
-                            <Icon icon={SlidersHorizontal} color="white" size={18} />
-                        </button>
-                        {
-                            active && <ForumSettingsModal setShow={() => setActive(false)}/>
-                        }
+                    <button
+                        type="button"
+                        aria-expanded={active}
+                        onClick={() => setActive((previousState) => !previousState)}
+                        className="inline-flex items-center gap-2 rounded-full border border-zinc-700 px-3 py-2 text-sm text-zinc-200 transition-colors hover:border-blue-500 hover:text-white"
+                    >
+                        <Icon icon={SlidersHorizontal} color="white" size={16} />
+                        Автомобиль
+                    </button>
+                    {active && <ForumSettingsModal setShow={() => setActive(false)} />}
                 </div>
             </div>
-                <span className="text-white text-xl px-4 font-semibold ">
+                <h2 className="mb-3 text-xl font-semibold text-white">
                     All threads
-                </span>
+                </h2>
                 <div>
                     {ForumFilter.length > 0 ? ForumFilter.map((post: IForumPost) => (
                         <ForumCard
@@ -95,7 +96,9 @@ export default function ForumHero({ posts }: IForumHeroProps) {
                             description={post.description}
                         />
                     )) : (
-                        <p className="px-4 py-6 text-zinc-400">No matching threads found.</p>
+                        <p className="rounded-2xl border border-dashed border-zinc-700 px-6 py-12 text-center text-zinc-400">
+                            No matching threads found.
+                        </p>
                     )}
                 </div>
         </div>
