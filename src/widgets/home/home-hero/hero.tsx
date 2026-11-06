@@ -41,7 +41,7 @@ export default function Hero() {
 
             <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[55%] items-center justify-end md:flex">
                 <motion.img
-                    src="/Audi-A5.png" 
+                    src="/Audi-A5.webp" 
                     alt="VAG Car"
                     initial={{ x: '50vw', opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
