@@ -33,6 +33,7 @@
 ## Архитектура
 
 Feature-Sliced Design:
+
 ```bash
 src/
 ├── app/        # роуты и layout
@@ -41,8 +42,29 @@ src/
 ├── entities/   # сущности
 └── shared/     # переиспользуемый код
 ```
-text## Запуск
+
+## API
+
+Клиент запросов находится в `src/shared/api/apiRequest.ts`. Базовый URL задаётся
+переменной `NEXT_PUBLIC_API_URL`; по умолчанию используется `/api`. Скопируйте
+`.env.example` в `.env.local` и укажите адрес сервера при необходимости.
+
+Ожидаемые JSON-маршруты (списки возвращают массивы без обёртки):
+
+- `GET /vehicles` — справочник `{ brand, model, generation }`.
+- `GET /repair/guides`, `POST /repair/guides`.
+- `GET /rates/reviews`, `POST /rates/reviews`, `GET /rates/reviews/{id}`.
+- `GET /forum/posts`, `POST /forum/posts`, `GET /forum/posts/{id}`.
+- `POST /forum/posts/{id}/replies` с `{ body }`.
+- `POST /forum/posts/{id}/helpful` возвращает обновлённую тему.
+
+Создание руководства/отзыва/темы должно возвращать сущность с серверными полями
+`id`, датой и автором. Запросы отправляются с `credentials: include`; при отдельном
+домене API сервер должен разрешать credentialed CORS для origin сайта.
+
+## Запуск
 
 ```bash
 npm install
 npm run dev
+```
