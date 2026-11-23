@@ -17,13 +17,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "VAG-forum",
-  description: "VAG-forum is a forum for only vag users. VAG is a: VW, Audi, Porche, Bugatti, Lamborghini, Seat",
+  description: "Форум для владельцев автомобилей концерна VAG: Volkswagen, Audi, Škoda, SEAT, Cupra, Porsche и других.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="ru"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
